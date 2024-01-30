@@ -43,13 +43,13 @@ import InvoiceTable from "./InvoiceTable";
 
 import { currencies } from "../currencies";
 import { FormattedNumber } from "react-intl";
-import NumericFormatCustom from "../../../components/NumericFormatCustom";
+import NumericFormatCustom from "../../components/NumericFormatCustom";
 import { TransitionProps } from "@mui/material/transitions";
 import { AlertContext } from "../components/Alert";
 import GenerateButton from "./GenerateButton";
 import ImageSelector from "./ImageSelector";
-import { generateDummyClients } from "../../../faker/clients";
-import ClientModal from "../../clients/ClientModal";
+import { generateDummyClients } from "../../faker/clients";
+import ClientModal from "../clients/ClientModal";
 
 export default function InvoiceForm() {
   const settings: Setting = useMemo(function (): Setting {

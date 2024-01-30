@@ -16,7 +16,7 @@ import { FormikProps } from "formik";
 import { currencies } from "../currencies";
 import { useMemo } from "react";
 import { FormattedNumber } from "react-intl";
-import NumericFormatCustom from "../../../components/NumericFormatCustom";
+import NumericFormatCustom from "../../components/NumericFormatCustom";
 
 export default function InvoiceTable(props: { formik: FormikProps<Invoice> }) {
   const { handleBlur, handleChange, values, setFieldValue } = props.formik;

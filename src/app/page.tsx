@@ -93,7 +93,7 @@ export default function InvoiceDashboadPage() {
 
     let nextIDInvoice = 1;
     // const savedInvoices = localStorage.getItem("invoices");
-    const savedInvoices = [];
+    const savedInvoices: string = "[{},{}]";
     if (savedInvoices) {
       const data: Invoice[] = JSON.parse(savedInvoices);
 

@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Box } from "@mui/material";
 import { IntlProvider } from "react-intl";
-import AlertProvider from "../app/invoice/components/Alert";
+import AlertProvider from "./components/Alert";
 
 export default function RootLayout({
   children,
@@ -44,25 +44,25 @@ export default function RootLayout({
         <React.StrictMode>
           {/* <Provider store={store}> */}
           {/* <ThemeProvider theme={darkTheme}> */}
-            {/* <CssBaseline /> */}
+          {/* <CssBaseline /> */}
 
-            {/* <IntlProvider
+          {/* <IntlProvider
               // messages={messagesInFrench}
               locale="fr"
               defaultLocale="en"
             > */}
-              {/* <AlertProvider> */}
-              <ResponsiveAppbar />
-              {/* <Box sx={{ mt: 8 }}>{props.children}</Box> */}
-              {/* </AlertProvider> */}
-            {/* </IntlProvider> */}
+          {/* <AlertProvider> */}
+          <ResponsiveAppbar />
+          <Box sx={{ mt: 8 }}>{children}</Box>
+          {/* </AlertProvider> */}
+          {/* </IntlProvider> */}
           {/* </ThemeProvider> */}
 
           {/* <App /> */}
           {/* </Provider> */}
         </React.StrictMode>
 
-        {children}
+     
       </body>
     </html>
   );
