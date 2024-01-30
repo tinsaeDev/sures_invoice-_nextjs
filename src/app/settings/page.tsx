@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowBackIos,
   Business,
@@ -67,7 +69,7 @@ export default function SettingsPage() {
         onSubmit={(values) => {
           console.log(values);
 
-          localStorage.setItem("settings", JSON.stringify(values));
+          // localStorage.setItem("settings", JSON.stringify(values));
 
           alertContext?.showAlert({
             message: "The business profile are saved",

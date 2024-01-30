@@ -1,5 +1,6 @@
 import { Add, Close } from "@mui/icons-material";
 import { Box, Button, Fab } from "@mui/material";
+import Image from "next/image";
 import { useRef } from "react";
 
 export default function ImageSelector(props: {
@@ -35,7 +36,7 @@ export default function ImageSelector(props: {
 
       {value ? (
         <Box>
-          <img
+          <Image
             style={{
               height: props.height,
               width: "auto",
@@ -44,6 +45,7 @@ export default function ImageSelector(props: {
               left: 0,
             }}
             src={value instanceof Blob ? URL.createObjectURL(value) : value.url}
+            alt="Image Preview"
           />
 
           <Fab

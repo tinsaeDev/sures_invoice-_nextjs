@@ -17,6 +17,7 @@ import React, { ReactElement } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Assessment, Dashboard, People, Settings } from "@mui/icons-material";
 import Link from "next/link";
+import Image from "next/image";
 
 export interface MenuItem {
   title: string;
@@ -108,12 +109,7 @@ function MenuDrawler(props: MenuDrawlerProps) {
       >
         {/* Header */}
         <Stack direction="row" alignItems="flex-end" spacing={1}>
-          <img
-            src={"/logo.png"}
-            style={{
-              width: "5rem",
-            }}
-          />
+          <Image src={"/logo.png"} width={100} height={100} alt="App Logo" />
           <Stack>
             <Typography
               variant="subtitle1"

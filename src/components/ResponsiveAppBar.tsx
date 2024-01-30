@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -10,9 +10,8 @@ import { Typography, IconButton, Stack, Container, Chip } from "@mui/material";
 
 // tHEMEE
 import { CloudOffOutlined, DarkMode, LightMode } from "@mui/icons-material";
-import { RootState } from "../store";
-import { setLightMoode } from "../features/app/appSlice";
 import MenuDrawler from "./MenuDrawler";
+import { useState } from "react";
 
 function ResponsiveAppBar() {
   // const dispatch = useDispatch();
@@ -20,18 +19,19 @@ function ResponsiveAppBar() {
   // const colorMode = useSelector((state: RootState) => state.app.light_mode);
 
   const colorMode = "dark";
-  const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
+  const isOnline = true;
+  // const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
 
-  useEffect(function () {
-    window.addEventListener("offline", function () {
-      setIsOnline(false);
-    });
+  // useEffect(function () {
+  //   window.addEventListener("offline", function () {
+  //     setIsOnline(false);
+  //   });
 
-    // Online
-    window.addEventListener("online", function () {
-      setIsOnline(true);
-    });
-  }, []);
+  //   // Online
+  //   window.addEventListener("online", function () {
+  //     setIsOnline(true);
+  //   });
+  // }, []);
 
   //   Menu drawer controller
 

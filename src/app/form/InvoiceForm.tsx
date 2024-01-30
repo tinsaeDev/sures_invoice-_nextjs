@@ -50,10 +50,13 @@ import GenerateButton from "./GenerateButton";
 import ImageSelector from "./ImageSelector";
 import { generateDummyClients } from "../../faker/clients";
 import ClientModal from "../clients/ClientModal";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function InvoiceForm() {
   const settings: Setting = useMemo(function (): Setting {
-    const rawData = localStorage.getItem("settings");
+    // const rawData = localStorage.getItem("settings");
+    const rawData = "{}";
     if (!rawData) {
       return {
         logo: null,
@@ -80,9 +83,9 @@ export default function InvoiceForm() {
   const [hasLink, setHasLink] = useState(false);
   const [hasQR, setHasQR] = useState(false);
 
-  const { id } = useParams();
+  const id = useSearchParams().get("id");
   const invoices: Invoice[] = JSON.parse(
-    localStorage.getItem("invoices") || "[]"
+    "[]" //localStorage.getItem("invoices") || "[]"
   );
 
   let invoice: Invoice | undefined = undefined;
@@ -107,7 +110,7 @@ export default function InvoiceForm() {
       setSavingData(true);
 
       const invoices: Invoice[] = JSON.parse(
-        localStorage.getItem("invoices") || "[]"
+        "[]" // localStorage.getItem("invoices") || "[]"
       );
       invoices.splice(
         invoices.findIndex((inv) => inv.id == Number.parseInt(id)),
@@ -115,7 +118,7 @@ export default function InvoiceForm() {
         formikRef.current.values
       );
 
-      localStorage.setItem("invoices", JSON.stringify(invoices));
+      // localStorage.setItem("invoices", JSON.stringify(invoices));
 
       setTimeout(function () {
         setSavingData(false);
@@ -132,7 +135,7 @@ export default function InvoiceForm() {
   return (
     <Container maxWidth="xl">
       <Toolbar color="">
-        <Link to="/">
+        <Link href="/">
           <IconButton>
             <Home color="primary" />
           </IconButton>
@@ -224,7 +227,7 @@ export default function InvoiceForm() {
                               value={values.FROM}
                             />
 
-                            <Link to="/settings">
+                            <Link href="/settings">
                               <Button>Edit Business Profile</Button>
                             </Link>
                           </Stack>
@@ -1187,7 +1190,7 @@ export default function InvoiceForm() {
                       note: values.note,
                     };
 
-                    localStorage.setItem("template", JSON.stringify(template));
+                    // localStorage.setItem("template", JSON.stringify(template));
                     setShowTemplateSaveDialog(false);
 
                     if (alertContext) {
