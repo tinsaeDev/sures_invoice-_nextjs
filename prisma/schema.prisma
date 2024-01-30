@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  email String @unique
+
+  name String?
+
+  phone String?
+
+  invoices Invoice[]
+}
+
+model UploadedFile {
+  id   Int    @id @default(autoincrement())
+  path String
+
+  Invoice       Invoice[]
+  DefaultValues DefaultValues[]
+}
+
+model Labels {
+  id      Int    @id @default(autoincrement())
+  INVOICE String
+
+  //
+  FROM       String
+  BILL_TO    String
+  SHIPPED_TO String
+
+  //
+
+  DATE_PREPARED String
+  PAYMENT_TERMS String
+  DUE_DATE      String
+  PO            String
+
+  // Table
+
+  TABLE_ITEM   String
+  TABLE_QTY    String
+  TABLE_RATE   String
+  TABLE_AMOUNT String
+
+  // Footer
+
+  NOTE  String
+  LINK  String
+  QR    String
+  TERMS String
+
+  // Total
+
+  SUB_TOTAL   String
+  DISCOUNT    String
+  SHIPPING    String
+  TAX_RATE    String
+  TOTAL       String
+  AMOUNT_PAID String
+  BALANCE_DUE String
+  SIGNATURE   String
+}
+
+model DefaultValues {
+  id            Int    @id @default(autoincrement())
+  note          String
+  terms         String
+  currency_code String
+
+  tax_rate       Int
+  logo           UploadedFile @relation(fields: [uploadedFileId], references: [id])
+  signature      String
+  uploadedFileId Int
+}
+
+model Invoice {
+  id Int @id @default(autoincrement())
+
+  bill_to       String
+  shipped_to    String
+  date_prepared DateTime
+  payment_terms String
+  due_date      DateTime
+  po            String
+
+  // Table
+
+  items InvoiceItem[]
+
+  // Total
+
+  discount       Int
+  shipping       Int
+  amount_paid    Int
+  link           String
+  qr             UploadedFile @relation(fields: [uploadedFileId], references: [id])
+  uploadedFileId Int
+  User           User?        @relation(fields: [userId], references: [id])
+  userId         Int?
+}
+
+model InvoiceItem {
+  id        Int      @id @default(autoincrement())
+  Invoice   Invoice? @relation(fields: [invoiceId], references: [id])
+  invoiceId Int?
+}

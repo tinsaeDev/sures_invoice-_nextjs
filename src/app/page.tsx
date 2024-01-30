@@ -1,5 +1,3 @@
-"use client";
-
 import { Delete, Edit } from "@mui/icons-material";
 import {
   Card,
@@ -15,18 +13,23 @@ import {
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Link from "next/link";
 import { useMemo } from "react";
+import { PrismaClient } from "@prisma/client";
 
-export default function InvoiceDashboadPage() {
+const prisma = new PrismaClient();
+
+export default async function InvoiceDashboadPage() {
+  const invoices = await prisma.invoice.findMany({
+    where: {
+      id: 1,
+    },
+  });
+  console.log("INNN:", invoices);
+
   const companyInfo = {
     company_name: "Victor General Trading",
     logo_url: "https://sures-invoice-vite.vercel.app/vite.svg",
     tax_rate: 15,
   };
-
-  const invoices = useMemo(function (): Invoice[] {
-    return [];
-    // return JSON.parse(localStorage.getItem("invoices") || "[]") as Invoice[];
-  }, []);
 
   function createNewInvoice(): Invoice {
     let templateValues: Template | null = null;
