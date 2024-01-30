@@ -1,29 +1,16 @@
-import { Delete, Edit } from "@mui/icons-material";
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Container,
-  IconButton,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Container, Paper, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import Link from "next/link";
-import { useMemo } from "react";
 import { PrismaClient } from "@prisma/client";
+import InvoiceCard from "./InvoiceCard";
+// import { prisma } from "@/lib/db";
 
 const prisma = new PrismaClient();
-
 export default async function InvoiceDashboadPage() {
-  const invoices = await prisma.invoice.findMany({
+  const invoices: Invoice[] = await prisma.invoice.findMany({
     where: {
       id: 1,
     },
   });
-  console.log("INNN:", invoices);
 
   const companyInfo = {
     company_name: "Victor General Trading",
@@ -193,7 +180,7 @@ export default async function InvoiceDashboadPage() {
       </Stack>
 
       <Grid mt={1} container spacing={2}>
-        {invoices.map((inv) => {
+        {invoices.map((inv: Invoice) => {
           return (
             <Grid key={inv.id} xs={12} sm={4}>
               <InvoiceCard invoice={inv} />
@@ -202,31 +189,5 @@ export default async function InvoiceDashboadPage() {
         })}
       </Grid>
     </Container>
-  );
-}
-
-function InvoiceCard(props: { invoice: Invoice }) {
-  const { invoice } = props;
-  return (
-    <Card>
-      <CardHeader>{invoice.bill_to}</CardHeader>
-      <CardContent>
-        <Typography> {invoice.bill_to} </Typography>
-      </CardContent>
-      <CardActions>
-        <Link href={`/invoice/${invoice.id}`}>
-          <IconButton>
-            <Edit color="info" />
-          </IconButton>
-        </Link>
-        <IconButton
-          onClick={() => {
-            alert("This will open delete dialog of invoice");
-          }}
-        >
-          <Delete color="error" />
-        </IconButton>
-      </CardActions>
-    </Card>
   );
 }

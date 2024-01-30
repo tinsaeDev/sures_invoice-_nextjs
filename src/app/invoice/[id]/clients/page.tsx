@@ -20,7 +20,7 @@ import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableOptions,
 } from "mui-datatables";
-import { generateDummyClients } from "../../faker/clients";
+import { generateDummyClients } from "../../../../faker/clients";
 import ClientModal from "./ClientModal";
 import { useState } from "react";
 

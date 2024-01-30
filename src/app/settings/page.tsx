@@ -29,7 +29,7 @@ import { useContext, useMemo } from "react";
 
 import isoCountries from "i18n-iso-countries";
 import engLocale from "i18n-iso-countries/langs/en.json";
-import { AlertContext } from "../components/Alert";
+import { AlertContext } from "../invoice/[id]/components/Alert";
 import Link from "next/link";
 
 export default function SettingsPage() {
