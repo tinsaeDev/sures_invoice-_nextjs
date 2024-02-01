@@ -30,8 +30,12 @@ import isoCountries from "i18n-iso-countries";
 import engLocale from "i18n-iso-countries/langs/en.json";
 import { AlertContext } from "../invoice/[id]/components/Alert";
 import Link from "next/link";
+import ImageSelector from "../invoice/[id]/ImageSelector";
 
-export default function SettingForm(props: { setting: Setting }) {
+export default function SettingForm(props: {
+  setting: Setting;
+  saveData: (values: Setting) => Promise<any>;
+}) {
   const { setting } = props;
   const alertContext = useContext(AlertContext);
 
@@ -41,6 +45,7 @@ export default function SettingForm(props: { setting: Setting }) {
     code: code,
     name: isoCountries.getName(code, "en"),
   }));
+
   return (
     <Formik
       initialValues={setting}
@@ -85,15 +90,49 @@ export default function SettingForm(props: { setting: Setting }) {
                   </Typography>
                 </Stack>
 
-                <Button startIcon={<Save />} type="submit" variant="contained">
+                <Button
+                  onClick={() => {
+                    props
+                      .saveData(values)
+                      .then((res) => {
+                        // alertContext?.showAlert({
+                        //   message: "aa",
+                        //   severity: "success",
+                        //   title: "Saved",
+                        // });
+
+                        alert("Saved");
+                      })
+                      .catch(() => {
+                        alert("Errpr");
+                      });
+                  }}
+                  startIcon={<Save />}
+                  type="submit"
+                  variant="contained"
+                >
                   Save Changes
                 </Button>
               </Stack>
               <Paper sx={{ p: 2 }}>
-                <Box sx={{}}>
+                <Box>
                   <Typography variant="h5"> Basic Information</Typography>
                 </Box>
                 <Grid mt={3} container spacing={2}>
+                  {/* Logi */}
+                  <Grid xs={12}>
+                    <FormControl>
+                      <ImageSelector
+                        onChange={(val) => {
+                            setFieldValue("logo",val)
+                        }}
+                        placeholder="Company Logo"
+                        value={values.logo}
+                        height="10rem"
+                        width="auto"
+                      />
+                    </FormControl>
+                  </Grid>
                   {/* Company Name */}
                   <Grid xs={12}>
                     <FormControl fullWidth>

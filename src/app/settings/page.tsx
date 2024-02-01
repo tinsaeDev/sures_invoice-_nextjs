@@ -7,7 +7,7 @@ export default async function SettingsPage() {
     email: "",
     website: "",
     city: "",
-    company_name: "Sures CO. LTD",
+    company_name: "",
     country_code: "",
     postal: "",
     state: "",
@@ -15,8 +15,20 @@ export default async function SettingsPage() {
     street_2: "",
   };
 
-  console.log(setting);
+  // Server Action
+  async function saveData(values: Setting): Promise<any> {
+    "use server";
 
-  // return <Typography>{setting}</Typography>;
-  return <SettingForm setting={setting} />;
+    console.log("Saving...", values);
+    return prisma.setting.update({
+      where: {
+        id: 1,
+      },
+      data: {
+        ...values,
+        uploadedFileId: 1,
+      },
+    });
+  }
+  return <SettingForm setting={setting} saveData={saveData} />;
 }
