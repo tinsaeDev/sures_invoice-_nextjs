@@ -37,6 +37,8 @@ export default function ImageSelector(props: {
       {value ? (
         <Box>
           <Image
+            width={0}
+            height={0}
             style={{
               height: props.height,
               width: "auto",

@@ -19,7 +19,11 @@ model User {
 
   phone String?
 
-  invoices Invoice[]
+  invoices      Invoice[]
+  Setting       Setting[]
+  client        client[]
+  DefaultValues DefaultValues[]
+  Labels        Labels[]
 }
 
 model UploadedFile {
@@ -28,10 +32,12 @@ model UploadedFile {
 
   Invoice       Invoice[]
   DefaultValues DefaultValues[]
+  Setting       Setting[]
 }
 
 model Labels {
   id      Int    @id @default(autoincrement())
+  user    User   @relation(fields: [userId], references: [id])
   INVOICE String
 
   //
@@ -70,10 +76,13 @@ model Labels {
   AMOUNT_PAID String
   BALANCE_DUE String
   SIGNATURE   String
+  userId      Int
 }
 
 model DefaultValues {
-  id            Int    @id @default(autoincrement())
+  id   Int  @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+
   note          String
   terms         String
   currency_code String
@@ -82,6 +91,7 @@ model DefaultValues {
   logo           UploadedFile @relation(fields: [uploadedFileId], references: [id])
   signature      String
   uploadedFileId Int
+  userId         Int
 }
 
 model Invoice {
@@ -111,7 +121,62 @@ model Invoice {
 }
 
 model InvoiceItem {
-  id        Int      @id @default(autoincrement())
-  Invoice   Invoice? @relation(fields: [invoiceId], references: [id])
-  invoiceId Int?
+  id          Int      @id @default(autoincrement())
+  Invoice     Invoice? @relation(fields: [invoiceId], references: [id])
+  invoiceId   Int?
+  description String
+  qty         Int
+  price       Float
+}
+
+model client {
+  id   Int  @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+
+  type ClientType
+
+  organization_name  String
+  contact_first_name String
+  contact_last_name  String
+
+  first_name String
+  last_name  String
+
+  currency_code String
+  language_code String
+  email         String
+  phone         String
+  street_1      String
+  street_2      String
+  city          String
+  state         String
+  postal        String
+  country_code  String
+  userId        Int
+}
+
+enum ClientType {
+  PERSON
+  ORGANIZATION
+}
+
+model Setting {
+  id   Int  @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+
+  company_name String
+  email        String
+  website      String
+  logo         UploadedFile @relation(fields: [uploadedFileId], references: [id])
+
+  // Address
+  street_1 String
+  street_2 String
+
+  city           String
+  state          String
+  postal         String
+  country_code   String
+  uploadedFileId Int
+  userId         Int
 }
