@@ -7,8 +7,8 @@ export default function ImageSelector(props: {
   value: Blob | UploadedFile | null;
   onChange: (val: Blob | UploadedFile | null) => void;
   placeholder: string;
-  height?: string;
-  width?: string;
+  height?: number;
+  width?: number;
 }) {
   const { value } = props;
 
@@ -37,17 +37,18 @@ export default function ImageSelector(props: {
       {value ? (
         <Box>
           <Image
-            width={0}
-            height={0}
+            width={props.width || 0}
+            height={props.height || 0}
             style={{
-              height: props.height,
-              width: "auto",
+              height: props.height ? ` ${props.height}px` : "auto",
+              width: props.width ? `${props.width}px` : "auto",
               position: "relative",
               top: 0,
               left: 0,
             }}
             src={value instanceof Blob ? URL.createObjectURL(value) : value.url}
             alt="Image Preview"
+            unoptimized={true}
           />
 
           <Fab

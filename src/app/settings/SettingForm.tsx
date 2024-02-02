@@ -34,7 +34,7 @@ import ImageSelector from "../invoice/[id]/ImageSelector";
 
 export default function SettingForm(props: {
   setting: Setting;
-  saveData: (values: Setting) => Promise<any>;
+  saveData: (values: FormData) => Promise<any>;
 }) {
   const { setting } = props;
   const alertContext = useContext(AlertContext);
@@ -51,8 +51,6 @@ export default function SettingForm(props: {
       initialValues={setting}
       // validationSchema={{}}
       onSubmit={(values) => {
-        console.log(values);
-
         // localStorage.setItem("settings", JSON.stringify(values));
 
         alertContext?.showAlert({
@@ -92,8 +90,20 @@ export default function SettingForm(props: {
 
                 <Button
                   onClick={() => {
+                    const fd = new FormData();
+                    const files_keys = ["logo"];
+                    Object.entries(values).forEach(([key, value]) => {
+                      if (files_keys.includes(key)) {
+                        if (value instanceof Blob) {
+                          fd.append(key, value);
+                        }
+                      } else {
+                        fd.append(key, `${value}`);
+                      }
+                    });
                     props
-                      .saveData(values)
+
+                      .saveData(fd)
                       .then((res) => {
                         // alertContext?.showAlert({
                         //   message: "aa",
@@ -124,12 +134,12 @@ export default function SettingForm(props: {
                     <FormControl>
                       <ImageSelector
                         onChange={(val) => {
-                            setFieldValue("logo",val)
+                          setFieldValue("logo", val);
                         }}
                         placeholder="Company Logo"
                         value={values.logo}
-                        height="10rem"
-                        width="auto"
+                        height={100}
+                        
                       />
                     </FormControl>
                   </Grid>

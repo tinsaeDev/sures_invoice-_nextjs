@@ -201,8 +201,8 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                               setFieldValue("logo", value);
                             }}
                             placeholder="Company Logo"
-                            height="100px"
-                            width="auto"
+                            height={100}
+                            
                           />
 
                           {/* From */}
@@ -679,8 +679,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                     setFieldValue("qr", value);
                                   }}
                                   placeholder="Add QR Code "
-                                  height="100px"
-                                  width="auto"
+                                  height={100}                                  
                                 />
                               </Stack>
                             )}
@@ -1093,8 +1092,8 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                       }}
                                       value={values.signature}
                                       placeholder="Select Signature"
-                                      height="100px"
-                                      width="auto"
+                                      height={100}
+                                      
                                     />
                                   </Stack>
                                 </td>

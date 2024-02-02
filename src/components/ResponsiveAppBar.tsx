@@ -35,7 +35,7 @@ function ResponsiveAppBar() {
 
   //   Menu drawer controller
 
-  const [showDrawer, setShowDrawer] = useState<boolean>(true);
+  const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
   return (
     <>

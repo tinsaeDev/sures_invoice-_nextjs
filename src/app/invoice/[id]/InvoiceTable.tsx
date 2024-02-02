@@ -29,11 +29,10 @@ export default function InvoiceTable(props: { formik: FormikProps<Invoice> }) {
 
       if (!curr) {
         return {
-          code: "NAN",
-          name: "NAME",
+          code: "INR",
+          name: "Indian",
           symboll: "2",
         };
-        throw new Error("Unknown currenct code");
       }
       return curr;
     },

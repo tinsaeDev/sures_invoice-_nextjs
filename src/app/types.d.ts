@@ -57,7 +57,9 @@ type Template = TemplateLabels & {
   signature: Blob | UploadedFile | null;
 };
 type UploadedFile = {
+  id:number;
   url: string;
+  path: string;
 };
 
 type InvoiceValue = {

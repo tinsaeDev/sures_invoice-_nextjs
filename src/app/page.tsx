@@ -1,10 +1,70 @@
+// page.tsx
+
+"use server";
+
 import { Container, Paper, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { PrismaClient } from "@prisma/client";
 import InvoiceCard from "./InvoiceCard";
+import { NewInvoiceButton } from "./NewInvoiceButton";
 // import { prisma } from "@/lib/db";
 
 const prisma = new PrismaClient();
+
+async function saveInvoice(a: number): Promise<any> {
+  "use server";
+
+  return 1;
+
+  let nextIDInvoice = 1;
+  return nextIDInvoice;
+  // const savedInvoices = localStorage.getItem("invoices");
+  if (invoices.length > 0) {
+    const larget: number = Math.max(
+      ...invoices.map((inv) => {
+        return inv.id;
+      })
+    );
+
+    nextIDInvoice = larget + 1;
+  }
+
+  const invoiceValues: InvoiceValue = {
+    //
+    id: nextIDInvoice,
+    bill_to: "",
+    shipped_to: "",
+
+    date_prepared: "",
+    payment_terms: "",
+    due_date: "",
+    po: "",
+    link: "",
+    qr: null,
+
+    // Table
+
+    items: [
+      {
+        description: "",
+        qty: 1,
+        rate: 0,
+      },
+    ],
+
+    // Total
+
+    discount: 0,
+    shipping: 0,
+    amount_paid: 0,
+  };
+
+  return {
+    ...invoiceValues,
+    ...templateLabels,
+  } as Invoice;
+}
+
 export default async function InvoiceDashboadPage() {
   const invoices: Invoice[] = await prisma.invoice.findMany({
     where: {
@@ -12,127 +72,22 @@ export default async function InvoiceDashboadPage() {
     },
   });
 
+  const setting: Setting = await prisma.setting.findFirst({
+    where: {
+      id: 1,
+    },
+  });
+
+  const templateLabels: TemplateLabels = await prisma.labels.findFirst({
+    where: {
+      id: 1,
+    },
+  });
+
   const companyInfo = {
-    company_name: "Victor General Trading",
-    logo_url: "https://sures-invoice-vite.vercel.app/vite.svg",
-    tax_rate: 15,
+    company_name: setting.company_name,
   };
 
-  function createNewInvoice(): Invoice {
-    let templateValues: Template | null = null;
-    // const savedTemplate = localStorage.getItem("template");
-    const savedTemplate = null;
-
-    if (!savedTemplate) {
-      templateValues = {
-        logo: null,
-        currency_code: "USD",
-
-        note: "",
-        terms: "",
-        tax_rate: 0,
-
-        signature: null,
-
-        /**
-         * Template Labels */
-        INVOICE: "Invoice",
-        BILL_TO: "Bill to",
-        FROM: "From",
-        SHIPPED_TO: "Shipped to",
-
-        //
-
-        DATE_PREPARED: "Date",
-        PAYMENT_TERMS: "Payment Terms",
-        DUE_DATE: "Due Date",
-        PO: "PO",
-
-        // Table
-
-        TABLE_ITEM: "Item",
-        TABLE_QTY: "Quantity",
-        TABLE_RATE: "Rate",
-        TABLE_AMOUNT: "Amount",
-
-        // Footer
-
-        NOTE: "Note",
-        TERMS: "Terms",
-
-        // Total
-
-        SUB_TOTAL: "Sub Total",
-        DISCOUNT: "Discount",
-        SHIPPING: "Shipping",
-        TAX_RATE: "Tax rate",
-        TOTAL: "Total",
-        AMOUNT_PAID: "Amount Paid",
-        BALANCE_DUE: "Balance Due",
-        LINK: "Link",
-        QR: "QR Code",
-        SIGNATURE: "Signature",
-      } as Template;
-    } else {
-      try {
-        templateValues = JSON.parse(savedTemplate) as Template;
-      } catch (e) {
-        throw new Error("Invalid Template");
-      }
-    }
-
-    let nextIDInvoice = 1;
-    // const savedInvoices = localStorage.getItem("invoices");
-    const savedInvoices: string = "[{},{}]";
-    if (savedInvoices) {
-      const data: Invoice[] = JSON.parse(savedInvoices);
-
-      const larget: number = Math.max(
-        ...data.map((inv) => {
-          return inv.id;
-        })
-      );
-
-      nextIDInvoice = larget + 1;
-    }
-
-    const invoiceValues: InvoiceValue = {
-      //
-      id: nextIDInvoice,
-      bill_to: "",
-      shipped_to: "",
-
-      date_prepared: "",
-      payment_terms: "",
-      due_date: "",
-      po: "",
-      link: "",
-      qr: null,
-
-      // Table
-
-      items: [
-        {
-          description: "",
-          qty: 1,
-          rate: 0,
-        },
-      ],
-
-      // Total
-
-      discount: 0,
-      shipping: 0,
-      amount_paid: 0,
-    };
-
-    return {
-      ...invoiceValues,
-      ...templateValues,
-    } as Invoice;
-  }
-
-  // const navigate = useNavigate();
   return (
     <Container maxWidth="xl">
       <Paper sx={{ p: 3 }}>
@@ -156,27 +111,7 @@ export default async function InvoiceDashboadPage() {
         <Typography fontWeight="bold" variant="subtitle1">
           Invoices
         </Typography>
-        {/* <Button
-          startIcon={<Add />}
-          size="small"
-          variant="contained"
-          onClick={() => {
-            const newInvoice: Invoice = createNewInvoice();
-
-            // const invoices: Invoice[] = JSON.parse(
-            //   localStorage.getItem("invoices") || "[]"
-            // );
-            // invoices.push(newInvoice);
-
-            // localStorage.setItem("invoices", JSON.stringify(invoices));
-
-            //
-
-            // navigate(`/invoice/${newInvoice.id}`);
-          }}
-        >
-          New
-        </Button> */}
+        <NewInvoiceButton saveInvoice={saveInvoice} />
       </Stack>
 
       <Grid mt={1} container spacing={2}>
