@@ -21,12 +21,10 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { CloudOffOutlined, DarkMode, LightMode } from "@mui/icons-material";
 import MenuDrawler from "./MenuDrawler";
 import { useState } from "react";
+import Profile from "./profile/Profile";
 
 function ResponsiveAppBar() {
   const { data: session } = useSession();
-
-
-  console.log("Session : ", session);
 
   // const dispatch = useDispatch();
 
@@ -113,25 +111,7 @@ function ResponsiveAppBar() {
                   )}
                 </IconButton>
                 {/* Profile Info */}
-
-                {session ? (
-                  <Button
-                    onClick={() => {
-                      signOut();
-                    }}
-                  >
-                    Logout
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => {
-                      console.log("github");
-                      signIn("github");
-                    }}
-                  >
-                    Login
-                  </Button>
-                )}
+                <Profile />
               </Stack>
             </Stack>
           </Toolbar>

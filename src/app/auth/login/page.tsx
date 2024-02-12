@@ -10,12 +10,14 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { handleSubmit } from "./handleSubmit";
+
 import FormWrapper from "./FormWrapper";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 export default function SignIn() {
+  const { data: session } = useSession();
   return (
     <Box
       sx={{
@@ -42,6 +44,7 @@ export default function SignIn() {
           name="email"
           autoComplete="email"
           autoFocus
+          disabled
         />
         <TextField
           margin="normal"
@@ -52,6 +55,7 @@ export default function SignIn() {
           type="password"
           id="password"
           autoComplete="current-password"
+          disabled
         />
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}
