@@ -8,6 +8,8 @@ export const metadata = {
 import ResponsiveAppbar from "../components/ResponsiveAppBar";
 import { Box } from "@mui/material";
 
+import SessionWrapper from "../components/SessionWrapper";
+
 export default function RootLayout({
   children,
 }: {
@@ -25,29 +27,31 @@ export default function RootLayout({
   // });
 
   return (
-    <html lang="en">
-      <body>
-        <React.StrictMode>
-          {/* <Provider store={store}> */}
-          {/* <ThemeProvider theme={darkTheme}> */}
-          {/* <CssBaseline /> */}
+    <SessionWrapper>
+      <html lang="en">
+        <body>
+          <React.StrictMode>
+            {/* <Provider store={store}> */}
+            {/* <ThemeProvider theme={darkTheme}> */}
+            {/* <CssBaseline /> */}
 
-          {/* <IntlProvider
+            {/* <IntlProvider
               // messages={messagesInFrench}
               locale="fr"
               defaultLocale="en"
             > */}
-          {/* <AlertProvider> */}
-          <ResponsiveAppbar />
-          <Box sx={{ mt: 8 }}>{children}</Box>
-          {/* </AlertProvider> */}
-          {/* </IntlProvider> */}
-          {/* </ThemeProvider> */}
+            {/* <AlertProvider> */}
+            <ResponsiveAppbar />
+            <Box sx={{ mt: 8 }}>{children}</Box>
+            {/* </AlertProvider> */}
+            {/* </IntlProvider> */}
+            {/* </ThemeProvider> */}
 
-          {/* <App /> */}
-          {/* </Provider> */}
-        </React.StrictMode>
-      </body>
-    </html>
+            {/* <App /> */}
+            {/* </Provider> */}
+          </React.StrictMode>
+        </body>
+      </html>
+    </SessionWrapper>
   );
 }

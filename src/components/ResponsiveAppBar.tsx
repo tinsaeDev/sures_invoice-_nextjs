@@ -4,7 +4,16 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Typography, IconButton, Stack, Container, Chip } from "@mui/material";
+import {
+  Typography,
+  IconButton,
+  Stack,
+  Container,
+  Chip,
+  Button,
+} from "@mui/material";
+
+import { useSession, signIn, signOut } from "next-auth/react";
 
 // import { useSelector, useDispatch } from "react-redux";
 
@@ -14,6 +23,11 @@ import MenuDrawler from "./MenuDrawler";
 import { useState } from "react";
 
 function ResponsiveAppBar() {
+  const { data: session } = useSession();
+
+
+  console.log("Session : ", session);
+
   // const dispatch = useDispatch();
 
   // const colorMode = useSelector((state: RootState) => state.app.light_mode);
@@ -99,6 +113,25 @@ function ResponsiveAppBar() {
                   )}
                 </IconButton>
                 {/* Profile Info */}
+
+                {session ? (
+                  <Button
+                    onClick={() => {
+                      signOut();
+                    }}
+                  >
+                    Logout
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      console.log("github");
+                      signIn("github");
+                    }}
+                  >
+                    Login
+                  </Button>
+                )}
               </Stack>
             </Stack>
           </Toolbar>
