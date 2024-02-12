@@ -43,12 +43,12 @@ import InvoiceTable from "./InvoiceTable";
 
 import { currencies } from "../../currencies";
 import { FormattedNumber, IntlProvider } from "react-intl";
-import NumericFormatCustom from "../../../components/NumericFormatCustom";
+import NumericFormatCustom from "../../../../components/NumericFormatCustom";
 import { TransitionProps } from "@mui/material/transitions";
 import { AlertContext } from "./components/Alert";
 import GenerateButton from "./GenerateButton";
 import ImageSelector from "./ImageSelector";
-import { generateDummyClients } from "../../../faker/clients";
+import { generateDummyClients } from "../../../../faker/clients";
 import ClientModal from "./clients/ClientModal";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -130,7 +130,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
     <IntlProvider locale="fr">
       <Container maxWidth="xl">
         <Toolbar color="">
-          <Link href="/">
+          <Link href="/u">
             <IconButton>
               <Home color="primary" />
             </IconButton>
@@ -225,7 +225,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                 value={values.FROM}
                               />
 
-                              <Link href="/settings">
+                              <Link href="/u/settings">
                                 <Button>Edit Business Profile</Button>
                               </Link>
                             </Stack>

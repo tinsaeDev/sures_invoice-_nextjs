@@ -19,7 +19,7 @@ export default function InvoiceCard(props: { invoice: Invoice }) {
         <Typography> {invoice.bill_to} </Typography>
       </CardContent>
       <CardActions>
-        <Link href={`/invoice/${invoice.id}`}>
+        <Link href={`/u/invoice/${invoice.id}`}>
           <IconButton>
             <Edit color="info" />
           </IconButton>

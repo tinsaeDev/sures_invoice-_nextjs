@@ -75,23 +75,23 @@ function MenuDrawler(props: MenuDrawlerProps) {
     {
       icon: <Dashboard color="info" />,
       title: "Dashboard",
-      url: "/",
+      url: "/u",
     },
     {
       icon: <Assessment color="info" />,
       title: "Reports",
-      url: "/reports",
+      url: "/u/reports",
     },
 
     {
       icon: <People color="info" />,
       title: "Clients",
-      url: "/clients",
+      url: "/u/clients",
     },
     {
       icon: <Settings color="info" />,
       title: "Settings",
-      url: "/settings",
+      url: "/u/settings",
     },
   ];
 

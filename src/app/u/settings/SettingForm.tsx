@@ -78,7 +78,7 @@ export default function SettingForm(props: {
                 justifyContent="space-between"
               >
                 <Stack direction="row" alignItems="center" spacing={1}>
-                  <Link href="/">
+                  <Link href="/u">
                     <IconButton color="secondary">
                       <ArrowBackIos />
                     </IconButton>

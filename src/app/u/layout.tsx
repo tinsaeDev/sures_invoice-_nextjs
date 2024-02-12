@@ -5,10 +5,10 @@ export const metadata = {
   description: "Invoice Generator",
 };
 
-import ResponsiveAppbar from "../components/ResponsiveAppBar";
+import ResponsiveAppbar from "../../components/ResponsiveAppBar";
 import { Box } from "@mui/material";
 
-import SessionWrapper from "../components/SessionWrapper";
+import SessionWrapper from "../../components/SessionWrapper";
 
 export default function RootLayout({
   children,
