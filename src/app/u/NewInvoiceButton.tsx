@@ -3,8 +3,9 @@ import { Add } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { saveInvoice } from "./saveInvoice";
 
-export function NewInvoiceButton(props: { saveInvoice: (a:number) => Promise<any> }) {
+export function NewInvoiceButton() {
   const router = useRouter();
   const [clicked, setisClicked] = useState(false);
   return (
@@ -15,7 +16,7 @@ export function NewInvoiceButton(props: { saveInvoice: (a:number) => Promise<any
       variant="contained"
       onClick={() => {
         setisClicked(true);
-        props.saveInvoice(77).then((res) => {
+        saveInvoice(77).then((res) => {
             console.log(res);
           router.push(`/invoice/${res.id}`);
         });

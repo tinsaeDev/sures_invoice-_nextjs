@@ -12,12 +12,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 
 import FormWrapper from "./FormWrapper";
-import { useSession, signIn, signOut } from "next-auth/react";
+import SocialLogin from "./SocialLogin";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 export default function SignIn() {
-  const { data: session } = useSession();
   return (
     <Box
       sx={{
@@ -81,6 +80,8 @@ export default function SignIn() {
             </Link>
           </Grid>
         </Grid>
+
+        <SocialLogin />
       </FormWrapper>
     </Box>
   );

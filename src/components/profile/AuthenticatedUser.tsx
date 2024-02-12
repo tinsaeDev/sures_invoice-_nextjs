@@ -28,6 +28,7 @@ function AuthenticatedUser() {
     [session]
   );
 
+  const [logouting, setLogouting] = useState<boolean>(false);
   return (
     <>
       <Stack spacing={1}>
@@ -47,8 +48,12 @@ function AuthenticatedUser() {
 
         <Divider />
         <Button
+          disabled={logouting}
           onClick={() => {
-            signOut();
+            setLogouting(true);
+            signOut({
+              callbackUrl: "/auth/login",
+            });
           }}
           endIcon={<Logout />}
           size="small"

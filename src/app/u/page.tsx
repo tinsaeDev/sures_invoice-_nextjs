@@ -11,59 +11,6 @@ import { NewInvoiceButton } from "./NewInvoiceButton";
 
 const prisma = new PrismaClient();
 
-async function saveInvoice(a: number): Promise<any> {
-  "use server";
-
-  return 1;
-
-  let nextIDInvoice = 1;
-  return nextIDInvoice;
-  // const savedInvoices = localStorage.getItem("invoices");
-  if (invoices.length > 0) {
-    const larget: number = Math.max(
-      ...invoices.map((inv) => {
-        return inv.id;
-      })
-    );
-
-    nextIDInvoice = larget + 1;
-  }
-
-  const invoiceValues: InvoiceValue = {
-    //
-    id: nextIDInvoice,
-    bill_to: "",
-    shipped_to: "",
-
-    date_prepared: "",
-    payment_terms: "",
-    due_date: "",
-    po: "",
-    link: "",
-    qr: null,
-
-    // Table
-
-    items: [
-      {
-        description: "",
-        qty: 1,
-        rate: 0,
-      },
-    ],
-
-    // Total
-
-    discount: 0,
-    shipping: 0,
-    amount_paid: 0,
-  };
-
-  return {
-    ...invoiceValues,
-    ...templateLabels,
-  } as Invoice;
-}
 
 export default async function InvoiceDashboadPage() {
   const invoices: Invoice[] = await prisma.invoice.findMany({
@@ -85,8 +32,8 @@ export default async function InvoiceDashboadPage() {
   });
 
   const companyInfo = {
-    company_name: setting.company_name,
-  };
+    company_name: setting?.company_name,
+  } || "Null" ;
 
   return (
     <Container maxWidth="xl">
@@ -111,7 +58,7 @@ export default async function InvoiceDashboadPage() {
         <Typography fontWeight="bold" variant="subtitle1">
           Invoices
         </Typography>
-        <NewInvoiceButton saveInvoice={saveInvoice} />
+        <NewInvoiceButton />
       </Stack>
 
       <Grid mt={1} container spacing={2}>
