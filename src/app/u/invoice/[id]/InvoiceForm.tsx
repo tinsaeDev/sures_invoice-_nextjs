@@ -52,7 +52,7 @@ import { generateDummyClients } from "../../../../faker/clients";
 import ClientModal from "./clients/ClientModal";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Invoice, Setting } from "@prisma/client";
+import { Invoice, InvoiceItem, Setting } from "@prisma/client";
 import { saveInvoice } from "./saveInvoice";
 
 export default function InvoiceForm(props: {
@@ -118,7 +118,7 @@ export default function InvoiceForm(props: {
               touched,
             } = formik;
 
-            const subTotal: number = values.items
+            const subTotal: number = (values.items as InvoiceItem[])
               .map((p) => p.qty * p.rate)
               .reduce((p, c) => {
                 return p + c;
