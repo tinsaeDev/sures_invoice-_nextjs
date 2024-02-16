@@ -3,7 +3,8 @@ import { Add } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { saveInvoice } from "./saveInvoice";
+import { newInvoice } from "./newInvoice";
+import { Invoice } from "@prisma/client";
 
 export function NewInvoiceButton() {
   const router = useRouter();
@@ -16,8 +17,7 @@ export function NewInvoiceButton() {
       variant="contained"
       onClick={() => {
         setisClicked(true);
-        saveInvoice(77).then((res) => {
-            console.log(res);
+        newInvoice().then((res:Invoice) => {
           router.push(`/u/invoice/${res.id}`);
         });
       }}

@@ -4,7 +4,7 @@ import { prisma } from "@/lib/db";
 import { DefaultValues, User } from "@prisma/client";
 import { getServerSession } from "next-auth";
 
-export async function saveInvoice(a: number): Promise<any> {
+export async function newInvoice(): Promise<any> {
   // Create a new invoice record
 
   const session = await getServerSession();
