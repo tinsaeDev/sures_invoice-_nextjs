@@ -32,10 +32,7 @@ import { AlertContext } from "../invoice/[id]/components/Alert";
 import Link from "next/link";
 import ImageSelector from "../invoice/[id]/ImageSelector";
 
-export default function SettingForm(props: {
-  setting: Setting;
-  saveData: (values: FormData) => Promise<any>;
-}) {
+export default function SettingForm(props: { setting: Setting }) {
   const { setting } = props;
   const alertContext = useContext(AlertContext);
 
@@ -101,21 +98,8 @@ export default function SettingForm(props: {
                         fd.append(key, `${value}`);
                       }
                     });
-                    props
 
-                      .saveData(fd)
-                      .then((res) => {
-                        // alertContext?.showAlert({
-                        //   message: "aa",
-                        //   severity: "success",
-                        //   title: "Saved",
-                        // });
-
-                        alert("Saved");
-                      })
-                      .catch(() => {
-                        alert("Errpr");
-                      });
+                    alert("Not implemente yet");
                   }}
                   startIcon={<Save />}
                   type="submit"
@@ -139,7 +123,6 @@ export default function SettingForm(props: {
                         placeholder="Company Logo"
                         value={values.logo}
                         height={100}
-                        
                       />
                     </FormControl>
                   </Grid>
