@@ -26,6 +26,9 @@ export async function saveInvoice(a: number): Promise<any> {
 
   console.log("DefaultValuesss", defaultValues);
 
+  const defaultValuesWthoutId = { ...defaultValues };
+  delete defaultValuesWthoutId.id;
+
   const newInvoice = prisma.invoice.create({
     data: {
       userId: user.id,
@@ -43,7 +46,7 @@ export async function saveInvoice(a: number): Promise<any> {
       po: "",
       link: "",
 
-      ...defaultValues,
+      ...defaultValuesWthoutId,
 
       //
     },

@@ -202,7 +202,6 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                             }}
                             placeholder="Company Logo"
                             height={100}
-                            
                           />
 
                           {/* From */}
@@ -222,7 +221,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                 name="FROM"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.FROM}
+                                value={values.FROM_lbl}
                               />
 
                               <Link href="/u/settings">
@@ -286,7 +285,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                   name="BILL_TO"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={values.BILL_TO}
+                                  value={values.BILL_TO_lbl}
                                 />
 
                                 {values.bill_to ? (
@@ -400,7 +399,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                               <Stack>
                                 <AdvTextField
                                   size="small"
-                                  value={values.SHIPPED_TO}
+                                  value={values.SHIPPED_TO_lbl}
                                   inputProps={{
                                     style: {
                                       textAlign: "left",
@@ -432,7 +431,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                             <AdvTextField
                               onChange={handleChange}
                               onBlur={handleBlur}
-                              value={values.INVOICE}
+                              value={values.INVOICE_lbl}
                               name="INVOICE"
                               inputProps={{
                                 style: {
@@ -469,7 +468,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                             <Stack direction="row" alignItems="center">
                               <AdvTextField
                                 fullWidth
-                                value={values.DATE_PREPARED}
+                                value={values.DATE_PREPARED_lbl}
                                 name="DATE_PREPARED"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -494,7 +493,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 fullWidth
-                                value={values.PAYMENT_TERMS}
+                                value={values.PAYMENT_TERMS_lbl}
                                 name="PAYMENT_TERMS"
                               />
 
@@ -516,7 +515,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                             <Stack direction="row" alignItems="center">
                               <AdvTextField
                                 fullWidth
-                                value={values.DUE_DATE}
+                                value={values.DUE_DATE_lbl}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 name="DUE_DATE"
@@ -541,7 +540,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                 fullWidth
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                defaultValue={values.PO}
+                                defaultValue={values.PO_lbl}
                                 name="PO"
                               />
                               <TextField
@@ -576,7 +575,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                               inputProps={{ style: { textAlign: "left" } }}
                               onChange={handleChange}
                               onBlur={handleBlur}
-                              defaultValue={values.NOTE}
+                              defaultValue={values.NOTE_lbl}
                               name="NOTE"
                             />
                             <TextField
@@ -610,7 +609,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                     }}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    defaultValue={values.LINK}
+                                    defaultValue={values.LINK_lbl}
                                     name="LINK"
                                   />
 
@@ -658,7 +657,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                     }}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    defaultValue={values.QR}
+                                    defaultValue={values.QR_lbl}
                                     name="QR"
                                   />
 
@@ -673,14 +672,16 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                   </IconButton>
                                 </Stack>
 
-                                <ImageSelector
+                                {/* <ImageSelector
                                   value={values.qr}
                                   onChange={(value) => {
                                     setFieldValue("qr", value);
                                   }}
                                   placeholder="Add QR Code "
-                                  height={100}                                  
-                                />
+                                  height={100}
+                                /> */}
+
+                                <Typography> Image , QR logo </Typography>
                               </Stack>
                             )}
 
@@ -723,7 +724,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                               inputProps={{ style: { textAlign: "left" } }}
                               onChange={handleChange}
                               onBlur={handleBlur}
-                              defaultValue={values.TERMS}
+                              defaultValue={values.TERMS_lbl}
                               name="TERMS"
                             />
                             <TextField
@@ -772,7 +773,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                 <tr>
                                   <td>
                                     <AdvTextField
-                                      defaultValue={values.DISCOUNT}
+                                      defaultValue={values.DISCOUNT_lbl}
                                       onChange={handleChange}
                                       onBlur={handleBlur}
                                       name="DISCOUNT"
@@ -822,7 +823,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                 <tr>
                                   <td>
                                     <AdvTextField
-                                      defaultValue={values.SHIPPING}
+                                      defaultValue={values.SHIPPING_lbl}
                                       onChange={handleChange}
                                       onBlur={handleBlur}
                                       name="SHIPPING"
@@ -997,7 +998,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                     style={{
                                       fontWeight: "normal",
                                     }}
-                                    defaultValue={values.AMOUNT_PAID}
+                                    defaultValue={values.AMOUNT_PAID_lbl}
                                     name="AMOUNT_PAID"
                                   />
                                 </td>
@@ -1033,7 +1034,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                               <tr>
                                 <td>
                                   <AdvTextField
-                                    defaultValue={values.BALANCE_DUE}
+                                    defaultValue={values.BALANCE_DUE_lbl}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     name="BALANCE_DUE"
@@ -1074,7 +1075,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                     }
                                   >
                                     <AdvTextField
-                                      defaultValue={values.SIGNATURE}
+                                      defaultValue={values.SIGNATURE_lbl}
                                       name="SIGNATURE"
                                       onChange={handleChange}
                                       onBlur={handleBlur}
@@ -1093,7 +1094,6 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                                       value={values.signature}
                                       placeholder="Select Signature"
                                       height={100}
-                                      
                                     />
                                   </Stack>
                                 </td>
@@ -1165,57 +1165,7 @@ export default function InvoiceForm(props: { invoice: Invoice }) {
                     }}
                     open={showTemplateSaveDialog}
                     onYes={() => {
-                      saveData();
-                      const template: Template = {
-                        AMOUNT_PAID: values.AMOUNT_PAID,
-                        BALANCE_DUE: values.BALANCE_DUE,
-                        BILL_TO: values.BILL_TO,
-                        FROM: values.FROM,
-
-                        DATE_PREPARED: values.DATE_PREPARED,
-                        DISCOUNT: values.DISCOUNT,
-                        DUE_DATE: values.DUE_DATE,
-                        INVOICE: values.INVOICE,
-
-                        logo: values.logo,
-
-                        SIGNATURE: values.SIGNATURE,
-                        signature: values.signature,
-                        NOTE: values.NOTE,
-                        LINK: values.LINK,
-                        QR: values.QR,
-                        TERMS: values.TERMS,
-
-                        PAYMENT_TERMS: values.PAYMENT_TERMS,
-                        PO: values.PO,
-
-                        SHIPPED_TO: values.SHIPPED_TO,
-                        SHIPPING: values.SHIPPING,
-                        SUB_TOTAL: values.SUB_TOTAL,
-                        TABLE_AMOUNT: values.TABLE_AMOUNT,
-                        TABLE_ITEM: values.TABLE_ITEM,
-                        TABLE_QTY: values.TABLE_QTY,
-                        TABLE_RATE: values.TABLE_RATE,
-                        TAX_RATE: values.TAX_RATE,
-                        TOTAL: values.TOTAL,
-
-                        // Global Values
-                        terms: values.terms,
-                        currency_code: values.currency_code,
-                        tax_rate: values.tax_rate,
-                        note: values.note,
-                      };
-
-                      // localStorage.setItem("template", JSON.stringify(template));
-                      setShowTemplateSaveDialog(false);
-
-                      if (alertContext) {
-                        alertContext.showAlert({
-                          message: "Template Saved",
-                          title: "Saved",
-                          severity: "success",
-                        });
-                      }
+                      console.log("saving default");
                     }}
                   />
                 </Form>

@@ -109,7 +109,7 @@ model Invoice {
   INVOICE_lbl String
 
   //
-  FROM           String
+  FROM_lbl           String
   BILL_TO_lbl    String
   SHIPPED_TO_lbl String
 

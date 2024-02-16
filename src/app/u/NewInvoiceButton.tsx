@@ -18,7 +18,7 @@ export function NewInvoiceButton() {
         setisClicked(true);
         saveInvoice(77).then((res) => {
             console.log(res);
-          router.push(`/invoice/${res.id}`);
+          router.push(`/u/invoice/${res.id}`);
         });
       }}
     >

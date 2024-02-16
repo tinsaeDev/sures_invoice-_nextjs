@@ -7,44 +7,44 @@ type Currency = {
 };
 
 type TemplateLabels = {
-  INVOICE: string;
+  INVOICE_lbl: string;
 
   //
-  FROM: string;
-  BILL_TO: string;
-  SHIPPED_TO: string;
+  FROM_lbl: string;
+  BILL_TO_lbl: string;
+  SHIPPED_TO_lbl: string;
 
   //
 
-  DATE_PREPARED: string;
-  PAYMENT_TERMS: string;
-  DUE_DATE: string;
-  PO: string;
+  DATE_PREPARED_lbl: string;
+  PAYMENT_TERMS_lbl: string;
+  DUE_DATE_lbl: string;
+  PO_lbl: string;
 
   // Table
 
-  TABLE_ITEM: string;
-  TABLE_QTY: string;
-  TABLE_RATE: string;
-  TABLE_AMOUNT: string;
+  TABLE_ITEM_lbl: string;
+  TABLE_QTY_lbl: string;
+  TABLE_RATE_lbl: string;
+  TABLE_AMOUNT_lbl: string;
 
   // Footer
 
-  NOTE: string;
-  LINK: string;
-  QR: string;
-  TERMS: string;
+  NOTE_lbl: string;
+  LINK_lbl: string;
+  QR_lbl: string;
+  TERMS_lbl: string;
 
   // Total
 
-  SUB_TOTAL: string;
-  DISCOUNT: string;
-  SHIPPING: string;
-  TAX_RATE: string;
-  TOTAL: string;
-  AMOUNT_PAID: string;
-  BALANCE_DUE: string;
-  SIGNATURE: string;
+  SUB_TOTAL_lbl: string;
+  DISCOUNT_lbl: string;
+  SHIPPING_lbl: string;
+  TAX_RATE_lbl: string;
+  TOTAL_lbl: string;
+  AMOUNT_PAID_lbl: string;
+  BALANCE_DUE_lbl: string;
+  SIGNATURE_lbl: string;
 };
 
 type Template = TemplateLabels & {
@@ -57,7 +57,7 @@ type Template = TemplateLabels & {
   signature: Blob | UploadedFile | null;
 };
 type UploadedFile = {
-  id:number;
+  id: number;
   url: string;
   path: string;
 };

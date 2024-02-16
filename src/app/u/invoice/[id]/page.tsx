@@ -7,7 +7,7 @@ export default async function InvoicePage({
   params: { slug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  console.log("Paaaram", params);
+  
 
   const invoice: Invoice = await prisma.invoice.findFirstOrThrow({
     where: {

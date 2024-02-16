@@ -49,7 +49,7 @@ export default function InvoiceTable(props: { formik: FormikProps<Invoice> }) {
         <TableHead>
           <TableCell>
             <AdvTextField
-              value={values.TABLE_ITEM}
+              value={values.TABLE_ITEM_lbl}
               inputProps={{
                 style: {
                   textAlign: "left",
@@ -62,7 +62,7 @@ export default function InvoiceTable(props: { formik: FormikProps<Invoice> }) {
 
           <TableCell>
             <AdvTextField
-              value={values.TABLE_QTY}
+              value={values.TABLE_QTY_lbl}
               inputProps={{
                 style: {
                   textAlign: "left",
@@ -74,7 +74,7 @@ export default function InvoiceTable(props: { formik: FormikProps<Invoice> }) {
           </TableCell>
           <TableCell>
             <AdvTextField
-              value={values.TABLE_RATE}
+              value={values.TABLE_RATE_lbl}
               inputProps={{
                 style: {
                   textAlign: "left",
@@ -86,7 +86,7 @@ export default function InvoiceTable(props: { formik: FormikProps<Invoice> }) {
           </TableCell>
           <TableCell align="right">
             <AdvTextField
-              value={values.TABLE_AMOUNT}
+              value={values.TABLE_AMOUNT_lbl}
               inputProps={{
                 style: {
                   textAlign: "right",
