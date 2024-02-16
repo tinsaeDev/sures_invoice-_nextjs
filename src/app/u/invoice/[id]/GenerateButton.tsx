@@ -1,23 +1,19 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import { FormikProps } from "formik";
 import { ListItemIcon, ListItemText } from "@mui/material";
-import { Email, PictureAsPdf, WhatsApp } from "@mui/icons-material";
+import { ArrowDropDown, Email, PictureAsPdf, WhatsApp } from "@mui/icons-material";
 
 export default function GenerateButton(props: {
-  formik: FormikProps<Invoice>;
+  
+  onPDF:()=>void;
 }) {
-  const { formik } = props;
-  const { values } = formik;
-  console.log(values);
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
@@ -44,7 +40,7 @@ export default function GenerateButton(props: {
         ref={anchorRef}
         aria-label="split button"
       >
-        <Button startIcon={<PictureAsPdf color="error" />} fullWidth>
+        <Button onClick={props.onPDF} startIcon={<PictureAsPdf color="error" />} fullWidth>
           Generate PDF
         </Button>
         <Button
@@ -55,7 +51,7 @@ export default function GenerateButton(props: {
           aria-haspopup="menu"
           onClick={handleToggle}
         >
-          <ArrowDropDownIcon />
+          <ArrowDropDown />
         </Button>
       </ButtonGroup>
       <Popper

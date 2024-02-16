@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/db";
 import InvoiceForm from "./InvoiceForm";
-import { Setting } from "@prisma/client";
+import { Setting, client } from "@prisma/client";
 import getUser from "@/lib/user";
 
 export default async function InvoicePage({
@@ -26,5 +26,13 @@ export default async function InvoicePage({
     },
   });
 
-  return <InvoiceForm invoice={invoice} settings={settings} />;
+  const clients: client[] = await prisma.client.findMany({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  return (
+    <InvoiceForm invoice={invoice} settings={settings} clients={clients} />
+  );
 }

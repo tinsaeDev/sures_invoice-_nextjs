@@ -30,14 +30,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Form, Formik, FormikProps } from "formik";
-import {
-  createRef,
-  forwardRef,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
+import { createRef, forwardRef, useState } from "react";
 import AdvTextField from "./components/AdvTestField";
 import InvoiceTable from "./InvoiceTable";
 
@@ -45,21 +38,20 @@ import { currencies } from "../../currencies";
 import { FormattedNumber, IntlProvider } from "react-intl";
 import NumericFormatCustom from "../../../../components/NumericFormatCustom";
 import { TransitionProps } from "@mui/material/transitions";
-import { AlertContext } from "./components/Alert";
 import GenerateButton from "./GenerateButton";
 import ImageSelector from "./ImageSelector";
-import { generateDummyClients } from "../../../../faker/clients";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Invoice, InvoiceItem, Setting } from "@prisma/client";
+import { Invoice, InvoiceItem, Setting, client } from "@prisma/client";
 import { saveInvoice } from "./saveInvoice";
 import ClientModal from "../../clients/ClientModal";
+import PrintPreviewModal from "./printing/PrintPreviewModal";
 
 export default function InvoiceForm(props: {
   invoice: Invoice;
   settings: Setting;
+  clients: client;
 }) {
-  const { invoice, settings } = props;
+  const { invoice, clients, settings } = props;
 
   // Shipping fee
   const [hasDiscount, setHasDiscount] = useState(false);
@@ -73,11 +65,10 @@ export default function InvoiceForm(props: {
   const formikRef = createRef<FormikProps<Invoice>>();
 
   const [showTemplateSaveDialog, setShowTemplateSaveDialog] = useState(false);
-  const alertContext = useContext(AlertContext);
-  const clients: Client[] = generateDummyClients(50);
 
   const [openClientModal, setOpenClientModal] = useState<boolean>(false);
 
+  const [showPrintPreview, setShowPrintPreview] = useState(false);
   return (
     <IntlProvider locale="fr">
       <Container maxWidth="xl">
@@ -271,7 +262,7 @@ export default function InvoiceForm(props: {
                                 <Stack flexGrow={1}>
                                   {(() => {
                                     const client = clients.find(
-                                      (c) => c.id == values.bill_to
+                                      (c: client) => c.id == values.bill_to
                                     );
                                     if (!client) {
                                       return "No result";
@@ -320,10 +311,10 @@ export default function InvoiceForm(props: {
                               </Stack>
                             ) : (
                               <Autocomplete
-                                options={clients.map((d) => d.id)}
+                                options={clients.map((d: client) => d.id)}
                                 getOptionLabel={(option: string) => {
                                   const client = clients.find(
-                                    (c) => c.id == option
+                                    (c: client) => c.id == option
                                   );
                                   if (!client) {
                                     return "No result";
@@ -1048,7 +1039,11 @@ export default function InvoiceForm(props: {
 
                   <Paper>
                     <Stack p={2} spacing={2}>
-                      <GenerateButton formik={formik} />
+                      <GenerateButton
+                        onPDF={() => {
+                          setShowPrintPreview(true);
+                        }}
+                      />
 
                       <Divider />
 
@@ -1108,6 +1103,18 @@ export default function InvoiceForm(props: {
                     console.log("saving default");
                   }}
                 />
+
+                {/* Invoice Print Modal */}
+                {showPrintPreview && (
+                  <PrintPreviewModal
+                    data={values}
+                    settings={settings}
+                    clients={clients}
+                    onClose={() => {
+                      setShowPrintPreview(false);
+                    }}
+                  />
+                )}
               </Form>
             );
           }}
