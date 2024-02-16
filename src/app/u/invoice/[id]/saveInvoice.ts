@@ -1,7 +1,24 @@
 "use server";
 
-import { Invoice } from "@prisma/client";
+import { prisma } from "@/lib/db";
+import getUser from "@/lib/user";
+import { Invoice, User } from "@prisma/client";
 
 export async function saveInvoice(values: Invoice) {
-  return "YES";
+  const user: User = await getUser();
+
+
+  delete values.items;
+  const updatedInvoice = await prisma.invoice.update({
+    where: {
+      userId: user.id,
+      id: values.id,
+    },
+    data: {
+      ...values,
+      
+    },
+  });
+
+  return updatedInvoice;
 }
