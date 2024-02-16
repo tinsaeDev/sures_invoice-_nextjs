@@ -7,6 +7,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { PrismaClient } from "@prisma/client";
 import InvoiceCard from "./InvoiceCard";
 import { NewInvoiceButton } from "./NewInvoiceButton";
+import { getServerSession } from "next-auth";
 // import { prisma } from "@/lib/db";
 
 const prisma = new PrismaClient();
@@ -31,16 +32,15 @@ export default async function InvoiceDashboadPage() {
     },
   });
 
-  const companyInfo = {
-    company_name: setting?.company_name,
-  } || "Null" ;
+const session = await getServerSession();
+  session?.user?.name
 
   return (
     <Container maxWidth="xl">
       <Paper sx={{ p: 3 }}>
         <Stack>
           <Typography variant="subtitle2" fontWeight="bold">
-            Welcome, {companyInfo.company_name} 👋
+            Welcome, {session?.user?.name} 👋
           </Typography>
           <Typography variant="caption" color="text.secondary">
             Create Invoices seamlessly
