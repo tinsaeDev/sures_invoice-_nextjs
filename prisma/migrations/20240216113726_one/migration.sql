@@ -1,0 +1,159 @@
+-- CreateTable
+CREATE TABLE `User` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `email` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NULL,
+    `phone` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `User_email_key`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `DefaultValues` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `note` VARCHAR(191) NOT NULL,
+    `terms` VARCHAR(191) NOT NULL,
+    `currency_code` VARCHAR(191) NOT NULL,
+    `tax_rate` INTEGER NOT NULL,
+    `userId` INTEGER NOT NULL,
+    `INVOICE_lbl` VARCHAR(191) NOT NULL,
+    `FROM_lbl` VARCHAR(191) NOT NULL,
+    `BILL_TO_lbl` VARCHAR(191) NOT NULL,
+    `SHIPPED_TO_lbl` VARCHAR(191) NOT NULL,
+    `DATE_PREPARED_lbl` VARCHAR(191) NOT NULL,
+    `PAYMENT_TERMS_lbl` VARCHAR(191) NOT NULL,
+    `DUE_DATE_lbl` VARCHAR(191) NOT NULL,
+    `PO_lbl` VARCHAR(191) NOT NULL,
+    `TABLE_ITEM_lbl` VARCHAR(191) NOT NULL,
+    `TABLE_QTY_lbl` VARCHAR(191) NOT NULL,
+    `TABLE_RATE_lbl` VARCHAR(191) NOT NULL,
+    `TABLE_AMOUNT_lbl` VARCHAR(191) NOT NULL,
+    `NOTE_lbl` VARCHAR(191) NOT NULL,
+    `LINK_lbl` VARCHAR(191) NOT NULL,
+    `QR_lbl` VARCHAR(191) NOT NULL,
+    `TERMS_lbl` VARCHAR(191) NOT NULL,
+    `SUB_TOTAL_lbl` VARCHAR(191) NOT NULL,
+    `DISCOUNT_lbl` VARCHAR(191) NOT NULL,
+    `SHIPPING_lbl` VARCHAR(191) NOT NULL,
+    `TAX_RATE_lbl` VARCHAR(191) NOT NULL,
+    `TOTAL_lbl` VARCHAR(191) NOT NULL,
+    `AMOUNT_PAID_lbl` VARCHAR(191) NOT NULL,
+    `BALANCE_DUE_lbl` VARCHAR(191) NOT NULL,
+    `SIGNATURE_lbl` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Invoice` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `bill_to` VARCHAR(191) NOT NULL,
+    `shipped_to` VARCHAR(191) NOT NULL,
+    `date_prepared` DATETIME(3) NOT NULL,
+    `payment_terms` VARCHAR(191) NOT NULL,
+    `due_date` DATETIME(3) NOT NULL,
+    `po` VARCHAR(191) NOT NULL,
+    `discount` INTEGER NOT NULL,
+    `shipping` INTEGER NOT NULL,
+    `amount_paid` INTEGER NOT NULL,
+    `link` VARCHAR(191) NOT NULL,
+    `note` VARCHAR(191) NOT NULL,
+    `terms` VARCHAR(191) NOT NULL,
+    `currency_code` VARCHAR(191) NOT NULL,
+    `tax_rate` INTEGER NOT NULL,
+    `userId` INTEGER NOT NULL,
+    `INVOICE_lbl` VARCHAR(191) NOT NULL,
+    `FROM` VARCHAR(191) NOT NULL,
+    `BILL_TO_lbl` VARCHAR(191) NOT NULL,
+    `SHIPPED_TO_lbl` VARCHAR(191) NOT NULL,
+    `DATE_PREPARED_lbl` VARCHAR(191) NOT NULL,
+    `PAYMENT_TERMS_lbl` VARCHAR(191) NOT NULL,
+    `DUE_DATE_lbl` VARCHAR(191) NOT NULL,
+    `PO_lbl` VARCHAR(191) NOT NULL,
+    `TABLE_ITEM_lbl` VARCHAR(191) NOT NULL,
+    `TABLE_QTY_lbl` VARCHAR(191) NOT NULL,
+    `TABLE_RATE_lbl` VARCHAR(191) NOT NULL,
+    `TABLE_AMOUNT_lbl` VARCHAR(191) NOT NULL,
+    `NOTE_lbl` VARCHAR(191) NOT NULL,
+    `LINK_lbl` VARCHAR(191) NOT NULL,
+    `QR_lbl` VARCHAR(191) NOT NULL,
+    `TERMS_lbl` VARCHAR(191) NOT NULL,
+    `SUB_TOTAL_lbl` VARCHAR(191) NOT NULL,
+    `DISCOUNT_lbl` VARCHAR(191) NOT NULL,
+    `SHIPPING_lbl` VARCHAR(191) NOT NULL,
+    `TAX_RATE_lbl` VARCHAR(191) NOT NULL,
+    `TOTAL_lbl` VARCHAR(191) NOT NULL,
+    `AMOUNT_PAID_lbl` VARCHAR(191) NOT NULL,
+    `BALANCE_DUE_lbl` VARCHAR(191) NOT NULL,
+    `SIGNATURE_lbl` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `InvoiceItem` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `invoiceId` INTEGER NULL,
+    `description` VARCHAR(191) NOT NULL,
+    `qty` INTEGER NOT NULL,
+    `price` DOUBLE NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `client` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `type` ENUM('PERSON', 'ORGANIZATION') NOT NULL,
+    `organization_name` VARCHAR(191) NOT NULL,
+    `contact_first_name` VARCHAR(191) NOT NULL,
+    `contact_last_name` VARCHAR(191) NOT NULL,
+    `first_name` VARCHAR(191) NOT NULL,
+    `last_name` VARCHAR(191) NOT NULL,
+    `currency_code` VARCHAR(191) NOT NULL,
+    `language_code` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `phone` VARCHAR(191) NOT NULL,
+    `street_1` VARCHAR(191) NOT NULL,
+    `street_2` VARCHAR(191) NOT NULL,
+    `city` VARCHAR(191) NOT NULL,
+    `state` VARCHAR(191) NOT NULL,
+    `postal` VARCHAR(191) NOT NULL,
+    `country_code` VARCHAR(191) NOT NULL,
+    `userId` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Setting` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `company_name` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `website` VARCHAR(191) NOT NULL,
+    `street_1` VARCHAR(191) NOT NULL,
+    `street_2` VARCHAR(191) NOT NULL,
+    `city` VARCHAR(191) NOT NULL,
+    `state` VARCHAR(191) NOT NULL,
+    `postal` VARCHAR(191) NOT NULL,
+    `country_code` VARCHAR(191) NOT NULL,
+    `userId` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `DefaultValues` ADD CONSTRAINT `DefaultValues_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Invoice` ADD CONSTRAINT `Invoice_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `InvoiceItem` ADD CONSTRAINT `InvoiceItem_invoiceId_fkey` FOREIGN KEY (`invoiceId`) REFERENCES `Invoice`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `client` ADD CONSTRAINT `client_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Setting` ADD CONSTRAINT `Setting_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
