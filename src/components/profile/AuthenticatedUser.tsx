@@ -52,7 +52,7 @@ function AuthenticatedUser() {
           onClick={() => {
             setLogouting(true);
             signOut({
-              callbackUrl: "/auth/login",
+              callbackUrl: "/api/auth/signin",
             });
           }}
           endIcon={<Logout />}

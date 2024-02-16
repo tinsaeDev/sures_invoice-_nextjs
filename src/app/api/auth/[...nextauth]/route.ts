@@ -19,7 +19,7 @@ const handler = NextAuth({
   ],
 
   callbacks: {
-    signIn: async ({ account, profile }) => {
+    signIn: async ({ account, profile }) => {      
       if (!account || !profile) {
         throw new Error("Account and Profile cannot be null");
       }
@@ -33,12 +33,16 @@ const handler = NextAuth({
         await prisma.user.create({
           data: {
             email: profile.email || "",
-            name: profile.name,          
+            name: profile.name,
           },
         });
       }
 
       return true; // Allow sign in regardless of user creation
+    },
+
+    redirect(_params) {
+      return "/u";
     },
   },
 });

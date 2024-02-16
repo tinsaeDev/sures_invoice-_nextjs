@@ -12,8 +12,8 @@ import { getServerSession } from "next-auth";
 
 const prisma = new PrismaClient();
 
-
 export default async function InvoiceDashboadPage() {
+  console.log("Dashboard...");
   const invoices: Invoice[] = await prisma.invoice.findMany({
     where: {
       id: 1,
@@ -32,8 +32,8 @@ export default async function InvoiceDashboadPage() {
     },
   });
 
-const session = await getServerSession();
-  session?.user?.name
+  const session = await getServerSession();
+  session?.user?.name;
 
   return (
     <Container maxWidth="xl">

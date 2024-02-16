@@ -9,22 +9,19 @@ import ResponsiveAppbar from "../../components/ResponsiveAppBar";
 import { Box } from "@mui/material";
 
 import SessionWrapper from "../../components/SessionWrapper";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // const lightMode = useSelector((root: RootState) => root.app.light_mode);
-
-  // const darkTheme = createTheme({
-  //   palette: {
-  //     // mode: lightMode,
-  //     background: {
-  //       default: "#ececec",
-  //     },
-  //   },
-  // });
+  const session = await getServerSession();
+  console.log(session);
+  if (!session) {
+    redirect(`/api/auth/signin`); // Navigate to the new post page
+  }
 
   return (
     <SessionWrapper>
