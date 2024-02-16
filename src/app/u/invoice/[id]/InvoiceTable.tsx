@@ -47,56 +47,58 @@ export default function InvoiceTable(props: { formik: FormikProps<Invoice> }) {
     >
       <Table size="small">
         <TableHead>
-          <TableCell>
-            <AdvTextField
-              value={values.TABLE_ITEM_lbl}
-              inputProps={{
-                style: {
-                  textAlign: "left",
-                },
-              }}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </TableCell>
+          <TableRow>
+            <TableCell>
+              <AdvTextField
+                value={values.TABLE_ITEM_lbl}
+                inputProps={{
+                  style: {
+                    textAlign: "left",
+                  },
+                }}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </TableCell>
 
-          <TableCell>
-            <AdvTextField
-              value={values.TABLE_QTY_lbl}
-              inputProps={{
-                style: {
-                  textAlign: "left",
-                },
-              }}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </TableCell>
-          <TableCell>
-            <AdvTextField
-              value={values.TABLE_RATE_lbl}
-              inputProps={{
-                style: {
-                  textAlign: "left",
-                },
-              }}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </TableCell>
-          <TableCell align="right">
-            <AdvTextField
-              value={values.TABLE_AMOUNT_lbl}
-              inputProps={{
-                style: {
-                  textAlign: "right",
-                },
-              }}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </TableCell>
-          <TableCell></TableCell>
+            <TableCell>
+              <AdvTextField
+                value={values.TABLE_QTY_lbl}
+                inputProps={{
+                  style: {
+                    textAlign: "left",
+                  },
+                }}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </TableCell>
+            <TableCell>
+              <AdvTextField
+                value={values.TABLE_RATE_lbl}
+                inputProps={{
+                  style: {
+                    textAlign: "left",
+                  },
+                }}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </TableCell>
+            <TableCell align="right">
+              <AdvTextField
+                value={values.TABLE_AMOUNT_lbl}
+                inputProps={{
+                  style: {
+                    textAlign: "right",
+                  },
+                }}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </TableCell>
+            <TableCell></TableCell>
+          </TableRow>
         </TableHead>
         <TableBody>
           {values.items.map((item, index) => {

@@ -1,26 +1,30 @@
 import { prisma } from "@/lib/db";
 import InvoiceForm from "./InvoiceForm";
-
+import { Setting } from "@prisma/client";
+import getUser from "@/lib/user";
 
 export default async function InvoicePage({
   params,
   searchParams,
 }: {
-  params: { slug: string };
+  params: { id: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  
-
+  const user = getUser();
   const invoice: Invoice = await prisma.invoice.findFirstOrThrow({
     where: {
-      id: 1,
+      id: Number.parseInt(params.id),
     },
-    include:{
-      items:true,
-
-    }
+    include: {
+      items: true,
+    },
   });
 
-  console.log("IIIIII",invoice)
-  return <InvoiceForm invoice={invoice} />;
+  const settings: Setting = await prisma.setting.findFirstOrThrow({
+    where: {
+      userId: user.id,
+    },
+  });
+
+  return <InvoiceForm invoice={invoice} settings={settings} />;
 }
