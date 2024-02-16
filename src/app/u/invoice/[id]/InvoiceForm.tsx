@@ -49,11 +49,11 @@ import { AlertContext } from "./components/Alert";
 import GenerateButton from "./GenerateButton";
 import ImageSelector from "./ImageSelector";
 import { generateDummyClients } from "../../../../faker/clients";
-import ClientModal from "./clients/ClientModal";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Invoice, InvoiceItem, Setting } from "@prisma/client";
 import { saveInvoice } from "./saveInvoice";
+import ClientModal from "../../clients/ClientModal";
 
 export default function InvoiceForm(props: {
   invoice: Invoice;

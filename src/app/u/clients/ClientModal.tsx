@@ -35,6 +35,8 @@ import engLocale from "i18n-iso-countries/langs/en.json";
 
 import currency from "iso-country-currency";
 import ISO6391 from "iso-639-1";
+import { saveClientAction } from "./saveClientAction";
+import { useRouter } from "next/navigation";
 
 export default function ClientModal(props: { onClose: () => void }) {
   isoCountries.registerLocale(engLocale);
@@ -86,6 +88,7 @@ export default function ClientModal(props: { onClose: () => void }) {
     country_code: "ET",
   } as Client;
 
+  const router = useRouter();
   return (
     <Modal open={true} onClose={props.onClose}>
       <Paper
@@ -97,7 +100,8 @@ export default function ClientModal(props: { onClose: () => void }) {
           justifyContent: "space-between",
           width: {
             xs: "100dvw", // theme.breakpoints.up('xs')
-            sm: "40vw", // theme.breakpoints.up('sm')
+            sm: "60vw", // theme.breakpoints.up('sm')
+            lg: "40vw", // theme.breakpoints.up('sm')
           },
 
           position: "fixed",
@@ -135,7 +139,11 @@ export default function ClientModal(props: { onClose: () => void }) {
               initialValues={initialValues}
               onSubmit={(values) => {
                 console.log(values);
-                alert("Submitting,,,");
+
+                saveClientAction(values).then((res) => {
+                  router.refresh();
+                  props.onClose();
+                });
               }}
             >
               {function (formik) {
