@@ -26,12 +26,6 @@ export default async function InvoiceDashboadPage() {
     },
   });
 
-  const templateLabels: TemplateLabels = await prisma.labels.findFirst({
-    where: {
-      id: 1,
-    },
-  });
-
   const session = await getServerSession();
   session?.user?.name;
 

@@ -87,7 +87,6 @@ type InvoiceValue = {
   shipping: number;
   amount_paid: number;
   link: string;
-  qr: Blob | UploadedFile | null;
 };
 
 type Invoice = Template & InvoiceValue;

@@ -1,53 +1,55 @@
 "use server";
 
+import { prisma } from "@/lib/db";
+import { DefaultValues, User } from "@prisma/client";
+import { getServerSession } from "next-auth";
+
 export async function saveInvoice(a: number): Promise<any> {
-  return 1;
+  // Create a new invoice record
 
-  let nextIDInvoice = 1;
-  return nextIDInvoice;
-  // const savedInvoices = localStorage.getItem("invoices");
-  if (invoices.length > 0) {
-    const larget: number = Math.max(
-      ...invoices.map((inv) => {
-        return inv.id;
-      })
-    );
-
-    nextIDInvoice = larget + 1;
+  const session = await getServerSession();
+  if (!session || !session.user) {
+    throw new Error("Not authenticated");
   }
+  const user: User = await prisma.user.findFirstOrThrow({
+    where: {
+      email: session.user.email as string,
+    },
+  });
 
-  const invoiceValues: InvoiceValue = {
-    //
-    id: nextIDInvoice,
-    bill_to: "",
-    shipped_to: "",
-
-    date_prepared: "",
-    payment_terms: "",
-    due_date: "",
-    po: "",
-    link: "",
-    qr: null,
-
-    // Table
-
-    items: [
-      {
-        description: "",
-        qty: 1,
-        rate: 0,
+  const defaultValues: DefaultValues =
+    await prisma.defaultValues.findFirstOrThrow({
+      where: {
+        userId: user.id,
       },
-    ],
+    });
 
-    // Total
+  console.log("DefaultValuesss", defaultValues);
 
-    discount: 0,
-    shipping: 0,
-    amount_paid: 0,
-  };
+  const newInvoice = prisma.invoice.create({
+    data: {
+      userId: user.id,
+      amount_paid: 0,
+      bill_to: "",
+      shipped_to: "",
+      shipping: 0,
 
-  return {
-    ...invoiceValues,
-    ...templateLabels,
-  } as Invoice;
+      date_prepared: new Date(),
+      due_date: new Date(),
+
+      discount: 0,
+
+      payment_terms: "",
+      po: "",
+      link: "",
+
+      ...defaultValues,
+
+      //
+    },
+  });
+
+  // const savedInvoices = localStorage.getItem("invoices");
+
+  return newInvoice;
 }
