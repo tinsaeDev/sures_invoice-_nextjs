@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
+import moment from "moment";
 // MUI Icons
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -25,7 +26,8 @@ import React from "react";
 import "./print.css";
 import { Print } from "@mui/icons-material";
 import Image from "next/image";
-import { client } from "@prisma/client";
+import { Client } from "@prisma/client";
+import { StyledTableCell, StyledTableRow } from "@/components/CustomTable";
 
 const printableRef = React.createRef<HTMLDivElement>();
 
@@ -33,12 +35,12 @@ export default function PrintPreviewModal(props: {
   onClose: () => void;
   data: Invoice;
   settings: Setting;
-  clients: client[];
+  clients: Client[];
 }) {
   const { data, settings, clients } = props;
   const printButton = React.createRef<HTMLButtonElement>();
 
-  const client: client = clients.find((c: client) => c.id == data.bill_to);
+  const client: Client = clients.find((c: Client) => c.id == data.bill_to);
 
   debugger;
   return (
@@ -169,25 +171,7 @@ export default function PrintPreviewModal(props: {
                           <Typography fontWeight={"bold"} variant="subtitle1">
                             Date
                           </Typography>
-                          <Typography variant="subtitle2">tODAY</Typography>
-                        </Stack>
-                      </Stack>
-
-                      <Stack spacing={1}>
-                        <Stack>
-                          <Typography variant="subtitle1" fontWeight={"bold"}>
-                            Balance Due
-                          </Typography>
-                          <Typography
-                            // variant="subtitle2"
-                            sx={{
-                              alignItems: "center",
-                            }}
-                            // fontWeight="bold"
-                          >
-                            {/* /Bill to */}
-                            bILL D
-                          </Typography>
+                          <Typography variant="subtitle2">{ moment().calendar() }</Typography>
                         </Stack>
                       </Stack>
                     </Stack>
@@ -198,27 +182,95 @@ export default function PrintPreviewModal(props: {
                   <TableContainer>
                     <Table>
                       <TableHead>
-                        <TableRow>
-                          <TableCell>Item</TableCell>
-                          <TableCell>Quantity</TableCell>
-                          <TableCell>Rate</TableCell>
-                          <TableCell>Amount</TableCell>
-                        </TableRow>
+                        <StyledTableRow>
+                          <StyledTableCell>Item</StyledTableCell>
+                          <StyledTableCell>Quantity</StyledTableCell>
+                          <StyledTableCell>Rate</StyledTableCell>
+                          <StyledTableCell>Amount</StyledTableCell>
+                        </StyledTableRow>
                       </TableHead>
                       <TableBody>
                         {data.items.map((item, index) => {
                           return (
-                            <TableRow key={index}>
-                              <TableCell>{item.description}</TableCell>
-                              <TableCell>{item.qty}</TableCell>
-                              <TableCell>{item.rate}</TableCell>
-                              <TableCell>{item.rate * item.qty}</TableCell>
-                            </TableRow>
+                            <StyledTableRow key={index}>
+                              <StyledTableCell>
+                                {item.description}
+                              </StyledTableCell>
+                              <StyledTableCell>{item.qty}</StyledTableCell>
+                              <StyledTableCell>{item.rate}</StyledTableCell>
+                              <StyledTableCell>
+                                {item.rate * item.qty}
+                              </StyledTableCell>
+                            </StyledTableRow>
                           );
                         })}
                       </TableBody>
                     </Table>
                   </TableContainer>
+
+                  <Grid container justifyContent="flex-end">
+                    <Grid xs={3}>
+                      <TableContainer sx={{ mt: 3 }}>
+                        <Table size="small">
+                          <TableRow>
+                            <TableCell>Sub Total</TableCell>
+                            <TableCell>Val</TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell>Tax</TableCell>
+                            <TableCell>Val</TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell>Shipping</TableCell>
+                            <TableCell>Val</TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell>Discount</TableCell>
+                            <TableCell>Val</TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell>Total</TableCell>
+                            <TableCell>Val</TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell>Paid</TableCell>
+                            <TableCell>Val</TableCell>
+                          </TableRow>
+
+                          <TableRow>
+                            <TableCell>Balance Due</TableCell>
+                            <TableCell>##3</TableCell>
+                          </TableRow>
+                        </Table>
+                      </TableContainer>
+                    </Grid>
+                  </Grid>
+                </Stack>
+
+                {/* Footer */}
+
+                <Stack mt={3} spacing={2}>
+                  {/* Payment Terms */}
+                  <Stack>
+                    <Typography variant="subtitle1" fontWeight="bold">
+                      {" "}
+                      Payment Terms{" "}
+                    </Typography>
+                    <Typography> {data.terms} </Typography>
+                  </Stack>
+
+                  {/* Note */}
+                  <Stack>
+                    <Typography variant="subtitle1" fontWeight="bold">
+                      Note{" "}
+                    </Typography>
+                    <Typography> {data.note} </Typography>
+                  </Stack>
                 </Stack>
               </Container>
             </Stack>

@@ -18,14 +18,14 @@ import {
 
 import ClientModal from "./ClientModal";
 import { useState } from "react";
-import { client } from "@prisma/client";
+import { Client } from "@prisma/client";
 
 import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableOptions,
 } from "mui-datatables";
 
-export default function ClientsTable(props: { clients: client[] }) {
+export default function ClientsTable(props: { clients: Client[] }) {
   const { clients } = props;
   const options: MUIDataTableOptions = {
     filterType: "checkbox",

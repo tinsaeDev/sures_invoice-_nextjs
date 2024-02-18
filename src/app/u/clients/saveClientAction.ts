@@ -2,9 +2,9 @@
 
 import { prisma } from "@/lib/db";
 import getUser from "@/lib/user";
-import { User, client } from "@prisma/client";
+import { User, Client } from "@prisma/client";
 
-export async function saveClientAction(values: client) {
+export async function saveClientAction(values: Client) {
   const user: User = await getUser();
 
   const withoutId = { ...values };

@@ -41,7 +41,7 @@ import { TransitionProps } from "@mui/material/transitions";
 import GenerateButton from "./GenerateButton";
 import ImageSelector from "./ImageSelector";
 import Link from "next/link";
-import { Invoice, InvoiceItem, Setting, client } from "@prisma/client";
+import { Invoice, InvoiceItem, Setting, Client } from "@prisma/client";
 import { saveInvoice } from "./saveInvoice";
 import ClientModal from "../../clients/ClientModal";
 import PrintPreviewModal from "./printing/PrintPreviewModal";
@@ -49,7 +49,7 @@ import PrintPreviewModal from "./printing/PrintPreviewModal";
 export default function InvoiceForm(props: {
   invoice: Invoice;
   settings: Setting;
-  clients: client;
+  clients: Client;
 }) {
   const { invoice, clients, settings } = props;
 
@@ -262,7 +262,7 @@ export default function InvoiceForm(props: {
                                 <Stack flexGrow={1}>
                                   {(() => {
                                     const client = clients.find(
-                                      (c: client) => c.id == values.bill_to
+                                      (c: Client) => c.id == values.bill_to
                                     );
                                     if (!client) {
                                       return "No result";
@@ -311,10 +311,10 @@ export default function InvoiceForm(props: {
                               </Stack>
                             ) : (
                               <Autocomplete
-                                options={clients.map((d: client) => d.id)}
+                                options={clients.map((d: Client) => d.id)}
                                 getOptionLabel={(option: string) => {
                                   const client = clients.find(
-                                    (c: client) => c.id == option
+                                    (c: Client) => c.id == option
                                   );
                                   if (!client) {
                                     return "No result";
