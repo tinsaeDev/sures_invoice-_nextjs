@@ -24,31 +24,25 @@ export default async function RootLayout({
   }
 
   return (
-    <SessionWrapper>
-      <html lang="en">
-        <body>
-          <React.StrictMode>
-            {/* <Provider store={store}> */}
-            {/* <ThemeProvider theme={darkTheme}> */}
-            {/* <CssBaseline /> */}
+    <React.StrictMode>
+      {/* <Provider store={store}> */}
+      {/* <ThemeProvider theme={darkTheme}> */}
+      {/* <CssBaseline /> */}
 
-            {/* <IntlProvider
+      {/* <IntlProvider
               // messages={messagesInFrench}
               locale="fr"
               defaultLocale="en"
             > */}
-            {/* <AlertProvider> */}
-            <ResponsiveAppbar />
-            <Box sx={{ mt: 8 }}>{children}</Box>
-            {/* </AlertProvider> */}
-            {/* </IntlProvider> */}
-            {/* </ThemeProvider> */}
+      {/* <AlertProvider> */}
+      <ResponsiveAppbar />
+      <Box sx={{ mt: 8 }}>{children}</Box>
+      {/* </AlertProvider> */}
+      {/* </IntlProvider> */}
+      {/* </ThemeProvider> */}
 
-            {/* <App /> */}
-            {/* </Provider> */}
-          </React.StrictMode>
-        </body>
-      </html>
-    </SessionWrapper>
+      {/* <App /> */}
+      {/* </Provider> */}
+    </React.StrictMode>
   );
 }

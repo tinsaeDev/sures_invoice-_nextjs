@@ -1,3 +1,4 @@
+import SessionWrapper from "@/components/SessionWrapper";
 import React from "react";
 
 export const metadata = {
@@ -9,5 +10,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <SessionWrapper>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </SessionWrapper>
+  );
 }
